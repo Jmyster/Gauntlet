@@ -23,7 +23,7 @@ public:
 	UPlayerData();
 
 	//variable constants no matter the class
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = PlayerData)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = PlayerData)
 	int PlayerScore;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = PlayerData)
 	int HealthDecreaseRate;

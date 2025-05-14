@@ -20,6 +20,8 @@ protected:
 	virtual void BeginPlay() override;
 
 	AActor* PlayerActor;
+
+	float TimeSinceLastDamage = 0.0f;
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
@@ -31,6 +33,15 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Stats")
 	float CurrentHealth;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat")
+	float DamageRadius = 150.0f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat")
+	float DamageAmount = 10.0f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat")
+	float DamageCooldown = 2.0f;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AI")
 	float AgroRadius = 800.0f;
 
@@ -38,5 +49,5 @@ public:
 
 	// Take damage
 	UFUNCTION(BlueprintCallable)
-	void ReceiveDamage(float DamageAmount);
+	void ReceiveDamage(float TakeDamageAmount);
 };

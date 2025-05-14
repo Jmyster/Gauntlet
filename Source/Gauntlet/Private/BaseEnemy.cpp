@@ -31,9 +31,6 @@ void ABaseEnemy::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-#if WITH_EDITOR
-	DrawDebugSphere(GetWorld(), GetActorLocation(), AgroRadius, 32, FColor::Red, false, -1, 0, 2.0f);
-#endif
 	if (PlayerActor)
 	{
 		float DistanceToPlayer = FVector::Dist(GetActorLocation(), PlayerActor->GetActorLocation());
@@ -52,11 +49,33 @@ void ABaseEnemy::Tick(float DeltaTime)
 			}
 		}
 	}
+
+	float Distance = FVector::Dist(GetActorLocation(), PlayerActor->GetActorLocation());
+
+	if (Distance <= DamageRadius)
+	{
+		TimeSinceLastDamage += DeltaTime;
+
+		if (TimeSinceLastDamage >= DamageCooldown)
+		{
+			ACharacter* PlayerChar = Cast<ACharacter>(PlayerActor);
+			if (PlayerChar)
+			{
+				UGameplayStatics::ApplyDamage(PlayerChar, DamageAmount, GetController(), this, nullptr);
+			}
+
+			TimeSinceLastDamage = 0.0f;
+		}
+	}
+	else
+	{
+		TimeSinceLastDamage = DamageCooldown; // Reset so it hits quickly if player re-enters
+	}
 }
 
-void ABaseEnemy::ReceiveDamage(float DamageAmount)
+void ABaseEnemy::ReceiveDamage(float TakeDamageAmount)
 {
-	CurrentHealth -= DamageAmount;
+	CurrentHealth -= TakeDamageAmount;
 
 	if (CurrentHealth <= 0.0f)
 	{
