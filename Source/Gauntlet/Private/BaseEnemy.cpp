@@ -45,7 +45,7 @@ void ABaseEnemy::Tick(float DeltaTime)
 			AAIController* AICon = Cast<AAIController>(GetController());
 			if (AICon)
 			{
-				AICon->MoveToActor(PlayerActor, 100.0f);
+				AICon->MoveToActor(PlayerActor, 50.0f);
 			}
 		}
 	}
@@ -69,7 +69,7 @@ void ABaseEnemy::Tick(float DeltaTime)
 	}
 	else
 	{
-		TimeSinceLastDamage = DamageCooldown; // Reset so it hits quickly if player re-enters
+		TimeSinceLastDamage = DamageCooldown;
 	}
 }
 

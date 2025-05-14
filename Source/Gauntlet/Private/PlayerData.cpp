@@ -9,7 +9,6 @@
 // Sets default values for this component's properties
 UPlayerData::UPlayerData()
 {
-	PlayerScore = 0;
 	HealthDecreaseRate = 1;
 	PlayerHealth = 700;
 	PlayerSpeed = 100;
