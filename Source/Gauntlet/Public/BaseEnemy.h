@@ -19,6 +19,7 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+	AActor* PlayerActor;
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
@@ -29,6 +30,11 @@ public:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Stats")
 	float CurrentHealth;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AI")
+	float AgroRadius = 800.0f;
+
+	bool bIsChasingPlayer = false;
 
 	// Take damage
 	UFUNCTION(BlueprintCallable)
