@@ -47,7 +47,7 @@ public:
 	float ShotSpeed;
 
 	
-	UPROPERTY(BlueprintAssignable)
+	UPROPERTY(BlueprintAssignable, Category = "Events")
 	FOnPlayerDeath OnPlayerDeath;
 
 	//Functions
